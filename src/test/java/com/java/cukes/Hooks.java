@@ -7,7 +7,6 @@ package com.java.cukes;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.OutputType;
@@ -49,12 +48,12 @@ public class Hooks {
 			cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 			driver = new InternetExplorerDriver(cap);
 		} else if (browser.equalsIgnoreCase("opera")) {
-			DesiredCapabilities cap = new DesiredCapabilities();
+			DesiredCapabilities cap = DesiredCapabilities.operaBlink();
 			cap.setBrowserName("opera");
 			OperaOptions options = new OperaOptions();
-			options.setBinary("/usr/bin/opera");			
-			cap.setCapability(OperaOptions.CAPABILITY, options);
-			cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);			
+			options.setBinary("/usr/bin/opera");
+			options.addArguments("--ignore-certificate-errors");
+			cap.setCapability(OperaOptions.CAPABILITY, options);			
 			OperaDriverService service = new OperaDriverService.Builder()
 					.usingDriverExecutable(new File("/usr/local/bin/operadriver"))					
 					.usingAnyFreePort().build();
