@@ -8,6 +8,9 @@ package com.java.cukes;
 import static org.junit.Assert.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -35,19 +38,15 @@ public class LoginSteps {
 	@Given("^I register (?:a|an) (new|existing) user$")
 	public void I_register_a_new_user(String userType) throws Throwable {
 		if (userType.equals("new")) {			
-			driver.findElement(By.id("firstname")).sendKeys(Utilities.generateRandomString(10));
-			driver.findElement(By.id("lastname")).sendKeys(Utilities.generateRandomString(10));
-			driver.findElement(By.id("email_address")).sendKeys(email);
-			driver.findElement(By.id("password")).sendKeys("ZAQ!zaq1");
-			driver.findElement(By.id("confirmation")).sendKeys("ZAQ!zaq1");
+			driver.findElement(By.id("email_address")).sendKeys(email);			
 		}
-		else if (userType.equals("existing")) {
-			driver.findElement(By.id("firstname")).sendKeys(Utilities.generateRandomString(10));
-			driver.findElement(By.id("lastname")).sendKeys(Utilities.generateRandomString(10));
-			driver.findElement(By.id("email_address")).sendKeys("admin@mailinator.com");
-			driver.findElement(By.id("password")).sendKeys("ZAQ!zaq1");
-			driver.findElement(By.id("confirmation")).sendKeys("ZAQ!zaq1");			
+		else if (userType.equals("existing")) {		
+			driver.findElement(By.id("email_address")).sendKeys("admin@mailinator.com");				
 		}
+		driver.findElement(By.id("firstname")).sendKeys(Utilities.generateRandomString(10));
+		driver.findElement(By.id("lastname")).sendKeys(Utilities.generateRandomString(10));
+		driver.findElement(By.id("password")).sendKeys("ZAQ!zaq1");
+		driver.findElement(By.id("confirmation")).sendKeys("ZAQ!zaq1");
 	}
 
 	@Given("^I click the (register|save|subscribe) button$")
@@ -73,7 +72,9 @@ public class LoginSteps {
 	    	assertEquals(driver.findElement(By.cssSelector("div.dashboard h1")).getText(),page.toUpperCase());
 	    }
 	    else if (page.equals("Logout")) {
-	    	assertTrue(driver.findElement(By.cssSelector("div.page-title")).getText().contains("LOGGED OUT"));	    	
+	    	new WebDriverWait(driver, 120)
+				.until(ExpectedConditions.textToBePresentInElementLocated(By.tagName("h1"), "LOGGED OUT"));
+//	    	assertTrue(driver.findElement(By.cssSelector("div.page-title")).getText().contains("LOGGED OUT"));	    	
 	    }
 	}
 

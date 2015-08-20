@@ -5,7 +5,7 @@
 
 package com.java.cukes;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -39,7 +39,9 @@ public class CheckoutSteps {
 
 	@Then("^I should see products$")
 	public void I_should_see_products() throws Throwable {
-		assertEquals(driver.findElement(By.cssSelector("h1")).getText(), "SEARCH RESULTS FOR 'SAMSUNG'");
+		new WebDriverWait(driver, 120)
+			.until(ExpectedConditions.textToBePresentInElementLocated(By.tagName("h1"), "SEARCH RESULTS FOR 'SAMSUNG'"));
+//		assertEquals(driver.findElement(By.cssSelector("h1")).getText(), "SEARCH RESULTS FOR 'SAMSUNG'");
 	}
 
 	@When("^I add to cart the product number (\\d+)$")
@@ -75,7 +77,9 @@ public class CheckoutSteps {
 
 	@When("^I continue with shipping method$")
 	public void I_continue_with_shipping_method() throws Throwable {
-		driver.findElement(By.cssSelector("#shipping-method-buttons-container button")).click();
+		new WebDriverWait(driver, 30)
+				  .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#shipping-method-buttons-container button"))).click();
+		
 	}
 
 	@When("^I select payment method as \"([^\"]*)\"$")
@@ -94,12 +98,14 @@ public class CheckoutSteps {
 		else if (payment_method.equals("cheque")) {
 			driver.findElement(By.id("p_method_checkmo")).click();
 		}
-		driver.findElement(By.cssSelector("#payment-buttons-container button")).click();		
+		new WebDriverWait(driver, 30)
+				  .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#payment-buttons-container button"))).click();		
 	}
 
 	@When("^I place the order$")
 	public void I_place_the_order() throws Throwable {
-		driver.findElement(By.cssSelector("button.btn-checkout")).click();
+		new WebDriverWait(driver, 30)
+				  .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.btn-checkout"))).click();		
 	}
 
 	@Then("^I should see order confirmation message$")

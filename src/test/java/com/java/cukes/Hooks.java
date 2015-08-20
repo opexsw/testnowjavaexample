@@ -31,7 +31,7 @@ public class Hooks {
 	public static WebDriver driver;
 	private String browser;
 
-	// Contains declaraion of all browsers (FF, Chrome, IE, Opera, Android)
+	// Contains declaration of all browsers (FF, Chrome, IE, Opera, Android)
 	// This method is a hook which runs before every test
 	@Before
 	public void beforeEach() throws IOException {
@@ -66,6 +66,7 @@ public class Hooks {
 		}
 		driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 	}
 
