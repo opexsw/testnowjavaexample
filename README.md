@@ -1,4 +1,4 @@
-# :sparkles: TESTNOW RUBY EXAMPLE :sparkles:
+# :sparkles: TESTNOW JAVA EXAMPLE :sparkles:
 Contains cucumber features for very famous magento web application.
 
 ## Overview :eyes:
