@@ -5,12 +5,13 @@
 
 package com.java.cukes;
 
+import cucumber.api.CucumberOptions;
 import cucumber.api.junit.*;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@Cucumber.Options(
-		format={"pretty", "html:target/reports", "json:target/reports/index.json"},
+@CucumberOptions(
+		plugin={"pretty", "html:target/reports", "json:target/reports/index.json"},
 		features="src/test/features"
 		)
 public class CukesRunnerTest {}
