@@ -1,6 +1,8 @@
 /* 
 * File Name: CukesRunnerTest.java
-* Copyright 2015, Opex Software LLP
+* Copyright 2015, Opex Software
+* Apache License, Version 2.0
+* This file acts as an entry point for Cucumber test suite
 */
 
 package com.java.cukes;

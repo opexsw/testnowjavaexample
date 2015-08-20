@@ -1,6 +1,8 @@
 /* 
 * File Name: Hooks.java
-* Copyright 2015, Opex Software LLP
+* Copyright 2015, Opex Software
+* Apache License, Version 2.0
+* This file contains the setup and teardown methods, browser initializations and screenshot functionality
 */
 
 package com.java.cukes;

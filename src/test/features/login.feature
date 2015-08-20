@@ -1,3 +1,9 @@
+# File Name: checkout.feature
+# Copyright 2015, Opex Software
+# Apache License, Version 2.0
+# This file contains cucumber steps for login and registration related scenarios
+
+
 Feature: Verifying the Login and registration functionality
 
   Background:

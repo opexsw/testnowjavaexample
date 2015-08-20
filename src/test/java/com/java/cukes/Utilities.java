@@ -1,6 +1,8 @@
 /* 
 * File Name: Utilities.java
-* Copyright 2015, Opex Software LLP
+* Copyright 2015, Opex Software
+* Apache License, Version 2.0
+* This file contains the utility methods frequently used by the step definitions
 */
 
 

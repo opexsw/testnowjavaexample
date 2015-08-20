@@ -1,3 +1,9 @@
+# File Name: checkout.feature
+# Copyright 2015, Opex Software
+# Apache License, Version 2.0
+# This file contains cucumber steps for checkout related scenarios
+
+
 Feature: Add product to cart and checkout using different payment methods
 
 Background:

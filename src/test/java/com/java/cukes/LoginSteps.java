@@ -1,6 +1,8 @@
 /* 
 * File Name: LoginSteps.java
-* Copyright 2015, Opex Software LLP
+* Copyright 2015, Opex Software
+* Apache License, Version 2.0
+* This file contains the step definitions for steps in login.feature cucumber file
 */
 
 package com.java.cukes;
