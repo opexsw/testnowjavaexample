@@ -4,7 +4,7 @@
 */
 
 
-package cukes;
+package com.java.cukes;
 
 import java.util.Random;
 

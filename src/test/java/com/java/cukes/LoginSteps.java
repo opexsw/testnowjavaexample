@@ -3,7 +3,7 @@
 * Copyright 2015, Opex Software LLP
 */
 
-package cukes;
+package com.java.cukes;
 
 import static org.junit.Assert.*;
 import org.openqa.selenium.By;
