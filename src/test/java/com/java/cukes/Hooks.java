@@ -37,7 +37,7 @@ public class Hooks {
 	public void beforeEach() throws IOException {
 		browser = System.getenv("BROWSER");
 		if (browser == null) {
-			browser = "opera";
+			browser = "firefox";
 		}
 		System.out.println("Browser selected is " + browser);
 		if (browser.equalsIgnoreCase("chrome")) {
