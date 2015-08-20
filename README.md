@@ -73,10 +73,10 @@ __Dont's__
   * Mozilla Firefox
   * Internet Explorer
   * Opera
-5. WebDrivers
-  * chromedriver -- put in any folder inlcuded in PATH variable (Permission : 777 to avoid hassle)
-  * operadriver -- mandatorily put in /usr/local/bin/operadriver (Permission : 777 to avoid hassle)
-  * iedriver -- put in any folder inlcuded in PATH variable (Permission : 777 to avoid hassle)
+5. __WebDrivers__
+  * chromedriver -- put in any folder inlcuded in PATH variable (777 to avoid permission issues)
+  * operadriver -- mandatorily put in /usr/local/bin/operadriver (777 to avoid permission issues)
+  * iedriver -- put in any folder inlcuded in PATH variable (777 to avoid permission issues)
 
 
 ## Setup :eyes:
