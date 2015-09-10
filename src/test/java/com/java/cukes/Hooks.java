@@ -44,11 +44,19 @@ public class Hooks {
 		System.out.println("Browser selected is " + browser);
 		if (browser.equalsIgnoreCase("chrome")) {
 			driver = new ChromeDriver();
+			driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
 		} else if (browser.equalsIgnoreCase("ie")) {
 			DesiredCapabilities cap = new DesiredCapabilities();
 			cap.setJavascriptEnabled(true);
 			cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 			driver = new InternetExplorerDriver(cap);
+			driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
 		} else if (browser.equalsIgnoreCase("opera")) {
 			DesiredCapabilities cap = DesiredCapabilities.operaBlink();
 			cap.setBrowserName("opera");
@@ -61,15 +69,19 @@ public class Hooks {
 					.usingAnyFreePort().build();
 			service.start();			
 			driver = new RemoteWebDriver(service.getUrl(),cap);
+			driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
 		} else if (browser.equalsIgnoreCase("android")) {
 			driver = new RemoteWebDriver(DesiredCapabilities.android());
 		} else {
 			driver = new FirefoxDriver();
+			driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
 		}
-		driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-		driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
 	}
 
 	// This method kills the browser after the test is over
