@@ -9,6 +9,8 @@ package com.java.cukes;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Random;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -46,8 +48,25 @@ public class CheckoutSteps {
 //		assertEquals(driver.findElement(By.cssSelector("h1")).getText(), "SEARCH RESULTS FOR 'SAMSUNG'");
 	}
 
-	@When("^I add to cart the product number (\\d+)$")
-	public void I_add_to_cart_the_product_number(int product_index) throws Throwable {
+	@When("^I add to cart the product (?:based on|number) (RUN_INDEX|\\d+)$")
+	public void I_add_to_cart_the_product_number(String type) throws Throwable {
+		String run_index = System.getenv("RUN_INDEX");
+		int product_index;
+		Random random = new Random();
+		if (type.equalsIgnoreCase("RUN_INDEX")) {
+			if (run_index == null) {
+				product_index = random.nextInt(3);									
+			}
+			else {
+				product_index = Integer.parseInt(run_index)%3;				
+			}
+			if (product_index == 0) {
+				product_index = 3;
+			}
+		} 
+		else {
+			product_index = Integer.parseInt(type);
+		}		
 		driver.findElement(By.xpath("//ul[contains(@class,'products-grid')]/li["+product_index+"]//button")).click();		
 	}
 

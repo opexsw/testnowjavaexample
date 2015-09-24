@@ -12,7 +12,7 @@ Background:
 Scenario: Product Checkout as a GUEST with a CREDIT CARD payment
 	When I do a global search using "Samsung" keyword
 	Then I should see products
-    When I add to cart the product number 1
+    When I add to cart the product based on RUN_INDEX
     Then I proceed to checkout
     When I select checkout method as Guest
     And I fill all mandatory details in Billing Information as guest
@@ -28,7 +28,7 @@ Scenario: Product Checkout as a REGISTERED USER with CREDIT CARD payment
     Then I should see "new_user" message for registration
     When I do a global search using "Samsung" keyword
     Then I should see products
-    When I add to cart the product number 1
+    When I add to cart the product based on RUN_INDEX
     Then I proceed to checkout
     And I fill all mandatory details in Billing Information as member
     And I continue with shipping method
@@ -39,7 +39,7 @@ Scenario: Product Checkout as a REGISTERED USER with CREDIT CARD payment
 Scenario: Product Checkout as a GUEST with CASH ON DELIVERY payment
     When I do a global search using "Samsung" keyword
     Then I should see products
-    When I add to cart the product number 2
+    When I add to cart the product based on RUN_INDEX
     Then I proceed to checkout
     When I select checkout method as Guest
     And I fill all mandatory details in Billing Information as guest
@@ -55,7 +55,7 @@ Scenario: Product Checkout as a REGISTERED USER with CASH ON DELIVERY payment
     Then I should see "new_user" message for registration
     When I do a global search using "Samsung" keyword
     Then I should see products
-    When I add to cart the product number 2
+    When I add to cart the product based on RUN_INDEX
     Then I proceed to checkout
     And I fill all mandatory details in Billing Information as member
     And I continue with shipping method
@@ -66,7 +66,7 @@ Scenario: Product Checkout as a REGISTERED USER with CASH ON DELIVERY payment
 Scenario: Product Checkout as a GUEST with CHEQUE payment
     When I do a global search using "Samsung" keyword
     Then I should see products
-    When I add to cart the product number 3
+    When I add to cart the product based on RUN_INDEX
     Then I proceed to checkout
     When I select checkout method as Guest
     And I fill all mandatory details in Billing Information as guest
@@ -82,7 +82,7 @@ Scenario: Product Checkout as a REGISTERED USER with CHEQUE payment
     Then I should see "new_user" message for registration
     When I do a global search using "Samsung" keyword
     Then I should see products
-    When I add to cart the product number 3
+    When I add to cart the product based on RUN_INDEX
     Then I proceed to checkout
     And I fill all mandatory details in Billing Information as member
     And I continue with shipping method
