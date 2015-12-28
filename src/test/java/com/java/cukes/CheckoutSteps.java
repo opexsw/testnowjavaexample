@@ -24,15 +24,20 @@ import cucumber.api.java.en.When;
 
 public class CheckoutSteps {	
 	public WebDriver driver;
+	private String magentoURL;
 	
 	public CheckoutSteps()
 	{
+		magentoURL = System.getenv("TEST_URL");
+		if(magentoURL == null){
+			magentoURL = "http://104.131.191.140/";
+		}
 		driver = Hooks.driver;
 	}
 	
 	@Given("^I am on magento customer page$")
 	public void I_am_on_magento_customer_page() throws Throwable {		
-		driver.get("http://104.131.191.140/");
+		driver.get(magentoURL);
 	}
 
 	@When("^I do a global search using \"([^\"]*)\" keyword$")
