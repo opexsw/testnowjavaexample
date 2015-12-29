@@ -17,6 +17,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriverService;
 import org.openqa.selenium.opera.OperaOptions;
@@ -76,18 +77,40 @@ public class Hooks {
 		} else if (browser.equalsIgnoreCase("android")) {
 			driver = new RemoteWebDriver(DesiredCapabilities.android());
 		} else {
-			driver = new FirefoxDriver();
+			FirefoxProfile profile = new FirefoxProfile();
+			File netexport = new File("/home/vagrant/testNow/TestNow/testnowjavaexample/src/test/resources/har/netExport-0.8.xpi");
+			File firebug = new  File("/home/vagrant/testNow/TestNow/testnowjavaexample/src/test/resources/har/firebug-2.0.13.xpi");
+			profile.addExtension(netexport);
+			profile.addExtension(firebug);
+			
+			profile.setPreference("app.update.enabled", false);
+			String domain = "extensions.firebug.";
+			profile.setPreference(domain +"currentVersion", "2.0.13");			
+			profile.setPreference(domain +"allpagesActivation", "on");
+			profile.setPreference(domain + "defaultPanelName", "net");
+        	profile.setPreference(domain + "net.enableSites", true);			
+        	profile.setPreference(domain + "netexport.alwaysEnableAutoExport", true);
+        	profile.setPreference(domain + "netexport.showPreview", false);
+        	profile.setPreference(domain + "netexport.defaultLogDir", "/home/vagrant/testNow/TestNow/testnowjavaexample/src/test/resources/har/");	
+			
+			driver = new FirefoxDriver(profile);
 			driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
 			driver.manage().window().maximize();
+		}
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
 	// This method kills the browser after the test is over
 	// It also takes a screenshot and embeds it in the report if the test fails
 	// This method is a hook which runs after every test
-	@After
+	@After 
 	public void afterEach(Scenario scenario) {
 		if (scenario.isFailed()) {
 			try {
@@ -101,7 +124,12 @@ public class Hooks {
 			}
 
 		}
-
+		try {
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		driver.quit();
 	}
 
