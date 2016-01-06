@@ -9,6 +9,9 @@ package com.java.cukes;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.OutputType;
@@ -25,6 +28,9 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import com.java.cukes.reporting.UPAReporter;
+import com.java.cukes.reporting.UPAResult;
+
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -33,11 +39,12 @@ public class Hooks {
 
 	public static WebDriver driver;
 	private String browser;
+	private UPAReporter reporter;
 
 	// Contains declaration of all browsers (FF, Chrome, IE, Opera, Android)
 	// This method is a hook which runs before every test
 	@Before
-	public void beforeEach() throws IOException {
+	public void beforeEach() throws IOException, URISyntaxException {
 		browser = System.getenv("BROWSER");
 		if (browser == null) {
 			browser = "firefox";
@@ -78,26 +85,31 @@ public class Hooks {
 			driver = new RemoteWebDriver(DesiredCapabilities.android());
 		} else {
 			FirefoxProfile profile = new FirefoxProfile();
-			File netexport = new File("/home/vagrant/testNow/TestNow/testnowjavaexample/src/test/resources/har/netExport-0.8.xpi");
-			File firebug = new  File("/home/vagrant/testNow/TestNow/testnowjavaexample/src/test/resources/har/firebug-2.0.13.xpi");
+			//File netexport = new File("/home/vagrant/testNow/TestNow/testnowjavaexample/src/test/resources/har/netExport-0.8.xpi");
+			//File firebug = new  File("/home/vagrant/testNow/TestNow/testnowjavaexample/src/test/resources/har/firebug-2.0.13.xpi");
+			File netexport = new File(this.getClass().getClassLoader().getResource("har/netExport-0.8.xpi").toURI());
+			File firebug = new  File(this.getClass().getClassLoader().getResource("har/firebug-2.0.13.xpi").toURI());
+		
 			profile.addExtension(netexport);
 			profile.addExtension(firebug);
 			
 			profile.setPreference("app.update.enabled", false);
 			String domain = "extensions.firebug.";
 			profile.setPreference(domain +"currentVersion", "2.0.13");			
-			profile.setPreference(domain +"allpagesActivation", "on");
+			profile.setPreference(domain +"allPagesActivation", "on");
 			profile.setPreference(domain + "defaultPanelName", "net");
         	profile.setPreference(domain + "net.enableSites", true);			
         	profile.setPreference(domain + "netexport.alwaysEnableAutoExport", true);
         	profile.setPreference(domain + "netexport.showPreview", false);
-        	profile.setPreference(domain + "netexport.defaultLogDir", "/home/vagrant/testNow/TestNow/testnowjavaexample/src/test/resources/har/");	
+        	File harFolder = new File(System.getProperty("user.dir")+"/target/reports/har/");
+        	profile.setPreference(domain + "netexport.defaultLogDir", harFolder.getAbsolutePath());	
 			
 			driver = new FirefoxDriver(profile);
 			driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
 			driver.manage().window().maximize();
+			reporter = new UPAReporter();
 		}
 		try {
 			Thread.sleep(5000);
@@ -124,13 +136,36 @@ public class Hooks {
 			}
 
 		}
-		try {
-			Thread.sleep(30000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		String scenarioName = scenario.getName().replace(" ", "_");
+		File harFolder = new File(System.getProperty("user.dir")+"/target/reports/har/");
+		File[] listOfFiles = harFolder.listFiles();
+		int cnt = 0;
+		ArrayList<String> upaLinks = new ArrayList<String>();
+		for (int i = 0; i < listOfFiles.length; i++) {
+			File file = listOfFiles[i];
+			if (file.getName().contains("+")) {
+				String htmlName = scenarioName+"_"+ cnt++;
+				File newFile = new File(file.getParent(),htmlName+".har");
+				file.renameTo(newFile);
+				String simpleHarExec = "simplehar "+newFile.getAbsolutePath() +" "+ newFile.getParent()+File.separator+htmlName+".html";
+				
+				try {
+					Runtime.getRuntime().exec(simpleHarExec);
+				} catch (IOException e) {
+					System.out.println("Unable to execute Simplehar");
+					e.printStackTrace();
+				}
+				upaLinks.add(newFile.getParent()+File.separator+htmlName+".html");
+			}	
 		}
+		UPAResult result = new UPAResult();
+		result.setScenarioName(scenarioName);
+		result.setUpaReportLinks(upaLinks);
+		reporter.addDetails(result);
+
+
 		driver.quit();
+		reporter.writeResults();
 	}
 
 }
