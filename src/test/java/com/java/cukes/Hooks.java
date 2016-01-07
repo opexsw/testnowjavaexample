@@ -155,7 +155,7 @@ public class Hooks {
 					System.out.println("Unable to execute Simplehar");
 					e.printStackTrace();
 				}
-				upaLinks.add(newFile.getParent()+File.separator+htmlName+".html");
+				upaLinks.add(htmlName+".html");
 			}	
 		}
 		UPAResult result = new UPAResult();
