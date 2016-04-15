@@ -30,7 +30,7 @@ public class CheckoutSteps {
 	{
 		magentoURL = System.getenv("TEST_URL");
 		if(magentoURL == null){
-			magentoURL = "http://104.131.191.140/";
+			magentoURL = "https://104.131.191.140/";
 		}
 		driver = Hooks.driver;
 	}
@@ -38,6 +38,9 @@ public class CheckoutSteps {
 	@Given("^I am on magento customer page$")
 	public void I_am_on_magento_customer_page() throws Throwable {		
 		driver.get(magentoURL);
+		if(System.getenv("BROWSER").equalsIgnoreCase("IE") && driver.findElements( By.id("overridelink") ).size()!= 0) {
+			driver.get("javascript:document.getElementById('overridelink').click();");
+		}
 	}
 
 	@When("^I do a global search using \"([^\"]*)\" keyword$")

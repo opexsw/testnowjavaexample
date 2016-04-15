@@ -10,6 +10,7 @@ package com.java.cukes;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -60,7 +61,7 @@ public class Hooks {
 			DesiredCapabilities cap = new DesiredCapabilities();
 			cap.setJavascriptEnabled(true);
 			cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-			driver = new InternetExplorerDriver(cap);
+			driver = new RemoteWebDriver(new URL("http://localhost:5555"),cap);
 			driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
@@ -136,36 +137,38 @@ public class Hooks {
 			}
 
 		}
-		String scenarioName = scenario.getName().replace(" ", "_");
-		File harFolder = new File(System.getProperty("user.dir")+"/target/reports/har/");
-		File[] listOfFiles = harFolder.listFiles();
-		int cnt = 0;
-		ArrayList<String> upaLinks = new ArrayList<String>();
-		for (int i = 0; i < listOfFiles.length; i++) {
-			File file = listOfFiles[i];
-			if (file.getName().contains("+")) {
-				String htmlName = scenarioName+"_"+ cnt++;
-				File newFile = new File(file.getParent(),htmlName+".har");
-				file.renameTo(newFile);
-				String simpleHarExec = "simplehar "+newFile.getAbsolutePath() +" "+ newFile.getParent()+File.separator+htmlName+".html";
-				
-				try {
-					Runtime.getRuntime().exec(simpleHarExec);
-				} catch (IOException e) {
-					System.out.println("Unable to execute Simplehar");
-					e.printStackTrace();
+		if (System.getenv("IS_UPA").equalsIgnoreCase("true")) {
+			String scenarioName = scenario.getName().replace(" ", "_");
+			File harFolder = new File(System.getProperty("user.dir") + "/target/reports/har/");
+			File[] listOfFiles = harFolder.listFiles();
+			int cnt = 0;
+			ArrayList<String> upaLinks = new ArrayList<String>();
+			for (int i = 0; i < listOfFiles.length; i++) {
+				File file = listOfFiles[i];
+				if (file.getName().contains("+")) {
+					String htmlName = scenarioName + "_" + cnt++;
+					File newFile = new File(file.getParent(), htmlName + ".har");
+					file.renameTo(newFile);
+					String simpleHarExec = "simplehar " + newFile.getAbsolutePath() + " " + newFile.getParent()
+							+ File.separator + htmlName + ".html";
+
+					try {
+						Runtime.getRuntime().exec(simpleHarExec);
+					} catch (IOException e) {
+						System.out.println("Unable to execute Simplehar");
+						e.printStackTrace();
+					}
+					upaLinks.add(htmlName + ".html");
 				}
-				upaLinks.add(htmlName+".html");
-			}	
+			}
+			UPAResult result = new UPAResult();
+			result.setScenarioName(scenarioName);
+			result.setUpaReportLinks(upaLinks);
+			reporter.addDetails(result);
+			reporter.writeResults();
 		}
-		UPAResult result = new UPAResult();
-		result.setScenarioName(scenarioName);
-		result.setUpaReportLinks(upaLinks);
-		reporter.addDetails(result);
-
-
 		driver.quit();
-		reporter.writeResults();
+		
 	}
 
 }
