@@ -13,6 +13,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.OutputType;
@@ -20,6 +22,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -57,6 +60,26 @@ public class Hooks {
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
 			driver.manage().window().maximize();
+		} else if (browser.equalsIgnoreCase("device")) {
+			// driver = new ChromeDriver();
+			// driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
+			// driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			// driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
+			// driver.manage().window().maximize();
+
+			String deviceName = System.getenv("VERSION");
+			Map<String, String> mobileEmulation = new HashMap<String, String>();
+			mobileEmulation.put("deviceName", deviceName);
+
+			Map<String, Object> chromeOptions = new HashMap<String, Object>();
+			chromeOptions.put("mobileEmulation", mobileEmulation);
+			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+			capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+			driver = new ChromeDriver(capabilities);
+			driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
+
 		} else if (browser.equalsIgnoreCase("ie")) {
 			DesiredCapabilities cap = new DesiredCapabilities();
 			cap.setJavascriptEnabled(true);
