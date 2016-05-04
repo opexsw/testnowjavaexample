@@ -68,9 +68,10 @@ public class Hooks {
 			// driver.manage().window().maximize();
 
 			String deviceName = System.getenv("VERSION");
+			deviceName = deviceName.replace("_", " ");
 			Map<String, String> mobileEmulation = new HashMap<String, String>();
 			mobileEmulation.put("deviceName", deviceName);
-
+			
 			Map<String, Object> chromeOptions = new HashMap<String, Object>();
 			chromeOptions.put("mobileEmulation", mobileEmulation);
 			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
