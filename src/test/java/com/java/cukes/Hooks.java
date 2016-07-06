@@ -110,25 +110,24 @@ public class Hooks {
 			driver = new RemoteWebDriver(DesiredCapabilities.android());
 		} else {
 			FirefoxProfile profile = new FirefoxProfile();
-			//File netexport = new File("/home/vagrant/testNow/TestNow/testnowjavaexample/src/test/resources/har/netExport-0.8.xpi");
-			//File firebug = new  File("/home/vagrant/testNow/TestNow/testnowjavaexample/src/test/resources/har/firebug-2.0.13.xpi");
-			File netexport = new File(this.getClass().getClassLoader().getResource("har/netExport-0.8.xpi").toURI());
-			File firebug = new  File(this.getClass().getClassLoader().getResource("har/firebug-2.0.13.xpi").toURI());
-		
-			profile.addExtension(netexport);
-			profile.addExtension(firebug);
-			
-			profile.setPreference("app.update.enabled", false);
-			String domain = "extensions.firebug.";
-			profile.setPreference(domain +"currentVersion", "2.0.13");			
-			profile.setPreference(domain +"allPagesActivation", "on");
-			profile.setPreference(domain + "defaultPanelName", "net");
-        	profile.setPreference(domain + "net.enableSites", true);			
-        	profile.setPreference(domain + "netexport.alwaysEnableAutoExport", true);
-        	profile.setPreference(domain + "netexport.showPreview", false);
-        	File harFolder = new File(System.getProperty("user.dir")+"/target/reports/har/");
-        	profile.setPreference(domain + "netexport.defaultLogDir", harFolder.getAbsolutePath());	
-			
+			if (System.getenv("IS_UPA").equalsIgnoreCase("true")) {
+				//File netexport = new File("/home/vagrant/testNow/TestNow/testnowjavaexample/src/test/resources/har/netExport-0.8.xpi");
+				//File firebug = new  File("/home/vagrant/testNow/TestNow/testnowjavaexample/src/test/resources/har/firebug-2.0.13.xpi");
+				File netexport = new File(this.getClass().getClassLoader().getResource("har/netExport-0.8.xpi").toURI());
+				File firebug = new File(this.getClass().getClassLoader().getResource("har/firebug-2.0.13.xpi").toURI());
+				profile.addExtension(netexport);
+				profile.addExtension(firebug);
+				profile.setPreference("app.update.enabled", false);
+				String domain = "extensions.firebug.";
+				profile.setPreference(domain + "currentVersion", "2.0.13");
+				profile.setPreference(domain + "allPagesActivation", "on");
+				profile.setPreference(domain + "defaultPanelName", "net");
+				profile.setPreference(domain + "net.enableSites", true);
+				profile.setPreference(domain + "netexport.alwaysEnableAutoExport", true);
+				profile.setPreference(domain + "netexport.showPreview", false);
+				File harFolder = new File(System.getProperty("user.dir") + "/target/reports/har/");
+				profile.setPreference(domain + "netexport.defaultLogDir", harFolder.getAbsolutePath());
+			}
 			driver = new FirefoxDriver(profile);
 			driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
