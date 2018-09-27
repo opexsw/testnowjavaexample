@@ -1,0 +1,4 @@
+#!/bin/bash
+export BROWSER=Chrome
+export TEST_URL=http://34.199.118.11/
+export IS_UPA=false
