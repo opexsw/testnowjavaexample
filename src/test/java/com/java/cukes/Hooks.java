@@ -26,6 +26,7 @@ import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriverService;
 import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.CapabilityType;
@@ -90,8 +91,13 @@ public class Hooks {
 
 			} else if (Browser.IE.getBrowser().equalsIgnoreCase(browser)) {
 				DesiredCapabilities cap = new DesiredCapabilities();
+				cap.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+				
+
 				cap.setJavascriptEnabled(true);
 				cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+				File file = new File("C:\\IEDriverServer\\IEDriverServer.exe");
+				System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
 				driver = new RemoteWebDriver(new URL("http://localhost:5555"),
 						cap);
 				driver.manage().timeouts()
@@ -99,7 +105,8 @@ public class Hooks {
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 				driver.manage().timeouts()
 						.setScriptTimeout(60, TimeUnit.SECONDS);
-				driver.manage().window().maximize();
+				driver.manage().window().maximize();	
+				driver = new InternetExplorerDriver(cap);
 			} else if (Browser.OPERA.getBrowser().equalsIgnoreCase(browser)) {
 				DesiredCapabilities cap = DesiredCapabilities.operaBlink();
 				cap.setBrowserName("opera");
