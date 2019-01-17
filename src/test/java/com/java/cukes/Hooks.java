@@ -180,6 +180,7 @@ public class Hooks {
 				FirefoxOptions firefoxOptions = new FirefoxOptions();
 				firefoxOptions.setBinary(firefoxBinary);
 				firefoxOptions.setProfile(profile);
+				firefoxOptions.setLegacy(false);
 				driver = new FirefoxDriver(firefoxOptions);
 				driver.manage().timeouts()
 						.pageLoadTimeout(120, TimeUnit.SECONDS);
