@@ -45,6 +45,7 @@ public class Hooks {
 	public static WebDriver driver;
 	private String browser;
 	private String webDriverPath;
+	private String test_url;
 	private UPAReporter reporter;
 
 	// Contains declaration of all browsers (FF, Chrome, IE, Opera, Android)
@@ -55,6 +56,7 @@ public class Hooks {
 
 			browser = System.getenv(Constants.BROWSER);
 			webDriverPath = System.getenv(Constants.WEB_DRIVER_PATH);
+			test_url = System.getenv(Constants.TEST_URL);
 			System.out.println("Browser selected is " + browser);
 			if (Browser.CHROME.getBrowser().equalsIgnoreCase(browser)) {
 				System.setProperty("webdriver.chrome.driver", StringUtils
@@ -92,7 +94,10 @@ public class Hooks {
 			} else if (Browser.IE.getBrowser().equalsIgnoreCase(browser)) {
 				DesiredCapabilities cap = new DesiredCapabilities();
 				cap.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-				
+				cap.setCapability(CapabilityType.BROWSER_NAME, "IE");		
+				cap.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);		
+				cap.setCapability("ignoreProtectedModeSettings", true);		
+				cap.setCapability("initialBrowserUrl", test_url);
 
 				cap.setJavascriptEnabled(true);
 				cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
