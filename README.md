@@ -17,7 +17,7 @@ This suite runs scenarios related to following:
 
 ## Purpose 
 
-Major purpose of this example automation is to understand how one can make maximum usage of [REAN Test](https://rean-platform.reancloud.com/reantest#/dashboard/home) cross browser testing with minimum effort by following some best practices mentioned here. 
+Major purpose of this example automation is to understand how one can make maximum usage of [REANTest](https://rean-platform.reancloud.com/reantest#/dashboard/home) cross browser testing with minimum effort by following some best practices mentioned here. 
 Few Best Practices are as follows:
 
 1. How to initialize different browsers
@@ -62,7 +62,7 @@ __Dont's__
 ## Requirements 
 
 1. __Code__
-  * REANTest JAVA EXAMPLE code 
+  * REAN Test - JAVA EXAMPLE code 
 2. __Programming Language__
   * Java
 3. __Dependencies__
@@ -82,7 +82,7 @@ __Dont's__
 
 __git clone https://github.com/reancloud/testnowjavaexample.git__
 
-#### NOTE: To avoid all the requirement and setup related extra work, use [REAN Test](https://rean-platform.reancloud.com/reantest#/dashboard/home) 
+#### NOTE: To avoid all the requirement and setup related extra work, use [REANTest](https://rean-platform.reancloud.com/reantest#/dashboard/home) 
 
 ## Execution 
 
