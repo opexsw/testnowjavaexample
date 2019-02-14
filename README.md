@@ -1,4 +1,4 @@
-REAN Test - JAVA EXAMPLE
+REAN Test - JAVA EXAMPLE  
 Contains cucumber features for very famous magento web application.
 
 ## Overview 
