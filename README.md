@@ -1,7 +1,7 @@
-# :sparkles: TESTNOW JAVA EXAMPLE :sparkles:
+## REAN Test - JAVA EXAMPLE  
 Contains cucumber features for very famous magento web application.
 
-## Overview :eyes:
+## Overview 
 
 Behavior Driven scenarios written in Cucumber for Magento web application.
 
@@ -9,31 +9,30 @@ Selenium-WebDriver is used as a backend tool for driving the browsers. This auto
 * Google Chrome
 * Mozilla Firefox
 * Internet Explorer
-* Opera
 
 This suite runs scenarios related to following:
 
 1. Login and Signup related features
 2. Buying of a product with different checkout methods
 
-##Purpose :eyes:
+## Purpose 
 
-Major purpose of this example automation is to understand how one can make maximum usage of [TestNow](https://opexsoftware/testnow) cross browser testing with minimum effort by following some best practices mentioned here. 
+Major purpose of this example automation is to understand how one can make maximum usage of [REAN Test](https://rean-platform.reancloud.com/reantest#/dashboard/home) cross browser testing with minimum effort by following some best practices mentioned here. 
 Few Best Practices are as follows:
 
 1. How to initialize different browsers
 2. How to write appropriate setup and teardown's
 3. How to take failed scenario screenshots
-4. How to create json and html reports which helps TestNow to create consolidated reports for you.
+4. How to create json and html reports which helps REAN Test to create consolidated reports for you.
 5. How to organize code in case of Java Cucumber setup
 6. and few more which you can relate to ... :)
 
-## Application Under Test (AUT) :eyes:
+## Application Under Test (AUT) 
 
 __Magento__ is an ecommerce platform built on open source technology which provides online merchants with a flexible shopping cart system, as well as control over the look, content and functionality of their online store. Magento offers powerful marketing, search engine optimization, and catalog-management tools.
 
 
-##How To Use This For Your Application :eyes:
+## How To Use This For Your Application 
 
 Before you fork or borrow ideas from this example project, it might be useful to know some do's and dont's which will enable you to implement this awesome framework for your project hassle free.
 
@@ -60,10 +59,10 @@ __Dont's__
 3. Do not delete anything from Hooks.java as it contains the setup and teardown which has browser initializations processes and screenshots taking methodology. You can add more intemediate methods like BeforeAll, AfterAll etc.
 
 
-## Requirements :eyes:
+## Requirements 
 
 1. __Code__
-  * TESTNOW JAVA EXAMPLE code 
+  * REANTest JAVA EXAMPLE code 
 2. __Programming Language__
   * Java
 3. __Dependencies__
@@ -79,13 +78,13 @@ __Dont's__
   * iedriver -- put in any folder inlcuded in PATH variable (777 to avoid permission issues)
 
 
-## Setup :eyes:
+## Setup 
 
-__git clone https://github.com/opexsw/testnowrubyexample.git__
+__git clone https://github.com/reancloud/testnowjavaexample.git__
 
-####NOTE: To avoid all the requirement and setup related extra work, use [TESTNOW](https://opexsoftware.com/testnow) :star2:
+#### NOTE: To avoid all the requirement and setup related extra work, use [REAN Test](https://rean-platform.reancloud.com/reantest#/dashboard/home) 
 
-## Execution :eyes:
+## Execution 
 
 __Commmands__ 
 
@@ -93,19 +92,10 @@ __Commmands__
 2. __mvn test__ -- This will recompile the code and execute the tests
 3. __mvn clean test__ -- This will do 1 and 2 both
 
-## Reporting :eyes:
+## Reporting 
 Magento automation reports are created in following 2 types of format
 
 1. __HTML__ : index.html
 2. __JSON__ : index.json
 
 Reports are created inside the target/reports directory with above mentioned filenames
-
-##Author :eyes:
-
-* Name: __Kaushal Rupani__ :sunglasses:
-* Organization: __Opex Software__ :star:
-* Email: __kaushal.rupani@opexsoftware.com__
-
-##Licence :eyes:
-For Licence information, see [here](https://github.com/opexsw/testnowjavaexample/blob/master/LICENSE.txt)
