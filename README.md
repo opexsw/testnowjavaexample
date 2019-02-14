@@ -1,4 +1,4 @@
-TESTNOW JAVA EXAMPLE
+REAN Test - JAVA EXAMPLE
 Contains cucumber features for very famous magento web application.
 
 ## Overview 
@@ -9,14 +9,13 @@ Selenium-WebDriver is used as a backend tool for driving the browsers. This auto
 * Google Chrome
 * Mozilla Firefox
 * Internet Explorer
-* Opera
 
 This suite runs scenarios related to following:
 
 1. Login and Signup related features
 2. Buying of a product with different checkout methods
 
-##Purpose 
+## Purpose 
 
 Major purpose of this example automation is to understand how one can make maximum usage of [REAN Test](https://rean-platform.reancloud.com/reantest#/dashboard/home) cross browser testing with minimum effort by following some best practices mentioned here. 
 Few Best Practices are as follows:
@@ -24,7 +23,7 @@ Few Best Practices are as follows:
 1. How to initialize different browsers
 2. How to write appropriate setup and teardown's
 3. How to take failed scenario screenshots
-4. How to create json and html reports which helps TestNow to create consolidated reports for you.
+4. How to create json and html reports which helps REAN Test to create consolidated reports for you.
 5. How to organize code in case of Java Cucumber setup
 6. and few more which you can relate to ... :)
 
@@ -33,7 +32,7 @@ Few Best Practices are as follows:
 __Magento__ is an ecommerce platform built on open source technology which provides online merchants with a flexible shopping cart system, as well as control over the look, content and functionality of their online store. Magento offers powerful marketing, search engine optimization, and catalog-management tools.
 
 
-##How To Use This For Your Application 
+## How To Use This For Your Application 
 
 Before you fork or borrow ideas from this example project, it might be useful to know some do's and dont's which will enable you to implement this awesome framework for your project hassle free.
 
@@ -63,7 +62,7 @@ __Dont's__
 ## Requirements 
 
 1. __Code__
-  * TESTNOW JAVA EXAMPLE code 
+  * REANTest JAVA EXAMPLE code 
 2. __Programming Language__
   * Java
 3. __Dependencies__
