@@ -60,7 +60,7 @@ __Dont's__
 3. Do not delete anything from Hooks.java as it contains the setup and teardown which has browser initializations processes and screenshots taking methodology. You can add more intemediate methods like BeforeAll, AfterAll etc.
 
 
-## Requirements :eyes:
+## Requirements 
 
 1. __Code__
   * TESTNOW JAVA EXAMPLE code 
