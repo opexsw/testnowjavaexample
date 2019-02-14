@@ -82,7 +82,7 @@ __Dont's__
 
 __git clone https://github.com/reancloud/testnowjavaexample.git__
 
-#### NOTE: To avoid all the requirement and setup related extra work, use [REAN Test](https://rean-platform.reancloud.com/reantest#/dashboard/home) :star2:
+#### NOTE: To avoid all the requirement and setup related extra work, use [REAN Test](https://rean-platform.reancloud.com/reantest#/dashboard/home) 
 
 ## Execution 
 
