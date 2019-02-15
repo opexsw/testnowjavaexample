@@ -92,26 +92,39 @@ public class Hooks {
 						.setScriptTimeout(60, TimeUnit.SECONDS);
 
 			} else if (Browser.IE.getBrowser().equalsIgnoreCase(browser)) {
+				System.out.println(">>>>>>> DRIVER <<<<<<<");
 				DesiredCapabilities cap = new DesiredCapabilities();
+					//cap.setCapability("ignoreProtectedModeSettings", true);
+				//cap.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, "https://34.199.118.11/");
 				cap.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-				cap.setCapability(CapabilityType.BROWSER_NAME, "IE");		
-				cap.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);		
-				cap.setCapability("ignoreProtectedModeSettings", true);		
-				cap.setCapability("initialBrowserUrl", test_url);
-
+				//cap.setCapability("ignoreZoomSetting", true);
+				//cap.setCapability("unexpectedAlertBehaviour", "accept");
+				//cap.setCapability("requireWindowFocus", true);
+				//cap.setCapability("enablePersistentHover", true);
+				cap.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+				//cap.setCapability(InternetExplorerDriver.NATIVE_EVENTS, true);
+				//cap.setCapability("disable-popup-blocking", true);
+				//cap.setCapability("ignoreProtectedModeSettings", true);
+				//cap.setCapability(InternetExplorerDriver.FORCE_CREATE_PROCESS, true);
+				//cap.setCapability(InternetExplorerDriver.IE_SWITCHES, "-private");
 				cap.setJavascriptEnabled(true);
 				cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+					//cap.setCapability("nativeEvents",true);
+					//cap.setCapability("browserFocus",true);
+					//cap.setCapability("ignoreZoomSetting", true);
+					//cap.setCapability("requireWindowFocus","true");
 				File file = new File("C:\\IEDriverServer\\IEDriverServer.exe");
 				System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
-				driver = new RemoteWebDriver(new URL("http://localhost:5555"),
-						cap);
+				//driver = new RemoteWebDriver(new URL("http://localhost:5555"),
+				//cap);
+				//driver.get("about:InPrivate");
+				driver = new InternetExplorerDriver(cap);
 				driver.manage().timeouts()
 						.pageLoadTimeout(120, TimeUnit.SECONDS);
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 				driver.manage().timeouts()
 						.setScriptTimeout(60, TimeUnit.SECONDS);
-				driver.manage().window().maximize();	
-				driver = new InternetExplorerDriver(cap);
+				driver.manage().window().maximize();
 			} else if (Browser.OPERA.getBrowser().equalsIgnoreCase(browser)) {
 				DesiredCapabilities cap = DesiredCapabilities.operaBlink();
 				cap.setBrowserName("opera");
